@@ -15,7 +15,8 @@ public class UserServiceImpl implements UserService{
 	private Long actualId = 0L;
 
 	@Override
-	public User getById(Long id) {
+	public User getById(Long id) 
+	{
 		return this.users
                 .stream().filter(user -> user.getId().equals(id))
                 .findFirst()
@@ -23,23 +24,27 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<User> getAllUsers() {
+	public List<User> getAllUsers() 
+	{
         return this.users;
 	}
 
 	@Override
-	public User createNew(User user) {
+	public User createNew(User user) 
+	{
 		return saveAndReturn(user);
 	}
 
 	@Override
-	public User save(Long id, User user) {
+	public User save(Long id, User user) 
+	{
         user.setId(id);
         return saveAndReturn(user);
 	}
 
 	@Override
-	public User patch(Long id, User user) {
+	public User patch(Long id, User user) 
+	{
 		User savedUser = getById(id);
 		if(user.getName() != null && !user.getName().isEmpty()) {
 			savedUser.setName(user.getName());
@@ -54,11 +59,13 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void deleteById(Long id) {
+	public void deleteById(Long id) 
+	{
 		this.users.removeIf(user -> user.getId().equals(id));
 	}
 	
-	private User saveAndReturn(User user) {
+	private User saveAndReturn(User user) 
+	{
 		if(user.getId() != null) {
 			User savedUser = getById(user.getId());
 			this.users.set(this.users.indexOf(savedUser), user);
